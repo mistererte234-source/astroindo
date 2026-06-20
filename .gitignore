@@ -1,0 +1,15 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Dependencies (not used by this static site)
+node_modules/
+
+# Stitch source export (kept locally, not deployed)
+stitch_astroindo_futuristic_landing_page.zip
+stitch_extracted/
+
+# Original source logos live in assets/img/ (committed); ignore root duplicates
+/logo.png
+/logo.jpg

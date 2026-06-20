@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Astroindo — Precision Design &amp; Web Development</title>
+<meta name="description" content="Astroindo builds sophisticated, high-fidelity websites and digital products for ambitious brands. Clarity over clutter. Intention over decoration." />
+<meta name="theme-color" content="#f9f9fb" />
+
+<!-- Social / Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Astroindo — Precision Design & Web Development" />
+<meta property="og:description" content="Sophisticated, high-fidelity digital experiences for ambitious brands." />
+<meta property="og:image" content="assets/img/logo.png" />
+<meta name="twitter:card" content="summary" />
+
+<!-- Icons -->
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet" />
+
+<!-- Tailwind (CDN) + design tokens -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#1d1d1f",
+          "primary-container": "#1d1d1f",
+          "surface": "#f9f9fb",
+          "surface-bright": "#f9f9fb",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-low": "#f3f3f5",
+          "surface-container": "#eeeef0",
+          "surface-variant": "#e2e2e4",
+          "on-surface": "#1a1c1d",
+          "on-surface-variant": "#46464a",
+          "inverse-surface": "#2f3132",
+          "stroke-subtle": "rgba(0,0,0,0.08)",
+          "surface-glass": "rgba(255,255,255,0.72)",
+          "background": "#f9f9fb",
+          "brand": "#e62118",
+          "brand-dark": "#b81a13",
+          "deep-black": "#000000"
+        },
+        fontFamily: { sans: ["Inter", "system-ui", "sans-serif"] },
+        maxWidth: { "container": "1200px" },
+        spacing: { "margin-desktop": "64px", "margin-mobile": "24px", "gutter": "24px" }
+      }
+    }
+  };
+</script>
+<link rel="stylesheet" href="assets/css/style.css" />
+<style>.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}</style>
+</head>
+
+<body class="bg-background text-on-surface font-sans antialiased overflow-x-hidden selection:bg-brand selection:text-white">
+
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ============== TOP NAV ============== -->
+<header class="bg-surface-glass backdrop-blur-xl fixed top-0 w-full z-50 border-b border-stroke-subtle">
+  <div class="flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop max-w-container mx-auto">
+    <a class="brand" href="#home" aria-label="Astroindo home">
+      <img class="brand__mark" src="assets/img/logo-mark.png" alt="" width="40" height="40" />
+      <span class="brand__name">Astro<b>indo</b></span>
+    </a>
+
+    <nav class="hidden md:flex gap-8 items-center text-sm font-medium">
+      <a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#services">Services</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#work">Work</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#about">About</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#contact">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="mailto:astroindo@gmail.com" class="btn hidden sm:inline-block bg-primary text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-inverse-surface transition-colors duration-300">
+        Inquire
+      </a>
+      <button id="menuBtn" class="md:hidden grid place-items-center w-10 h-10 rounded-full hover:bg-surface-container transition-colors" aria-label="Toggle menu" aria-expanded="false">
+        <span class="material-symbols-outlined" id="menuIcon">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu md:hidden border-t border-stroke-subtle bg-surface-glass backdrop-blur-xl" id="mobileMenu">
+    <nav class="flex flex-col px-margin-mobile py-3 text-base font-medium">
+      <a class="py-3 border-b border-stroke-subtle text-on-surface-variant" href="#services">Services</a>
+      <a class="py-3 border-b border-stroke-subtle text-on-surface-variant" href="#work">Work</a>
+      <a class="py-3 border-b border-stroke-subtle text-on-surface-variant" href="#about">About</a>
+      <a class="py-3" href="#contact">Contact</a>
+      <a href="mailto:astroindo@gmail.com" class="mt-3 mb-2 text-center bg-primary text-white px-5 py-3 rounded-full">Inquire</a>
+    </nav>
+  </div>
+</header>
+
+<main class="flex flex-col items-center w-full">
+
+  <!-- ============== HERO ============== -->
+  <section id="home" class="relative w-full pt-[150px] md:pt-[180px] pb-[120px] px-margin-mobile md:px-margin-desktop flex flex-col items-center justify-center text-center overflow-hidden">
+    <!-- subtle starfield -->
+    <div class="stars" id="stars" aria-hidden="true"></div>
+
+    <div class="relative max-w-container mx-auto flex flex-col items-center z-10">
+      <!-- Animated logo -->
+      <div class="hero-logo">
+        <span class="hero-logo__glow" aria-hidden="true"></span>
+        <div class="hero-logo__imgwrap">
+          <img class="hero-logo__img" src="assets/img/logo.png" alt="Astroindo logo" width="500" height="500" />
+          <span class="hero-logo__shine" aria-hidden="true"></span>
+        </div>
+        <svg class="hero-orbit" viewBox="0 0 360 360" aria-hidden="true">
+          <defs>
+            <path id="orbit" d="M 30 180 A 150 116 0 1 0 330 180 A 150 116 0 1 0 30 180 Z" />
+            <filter id="cometGlow" x="-120%" y="-120%" width="340%" height="340%">
+              <feGaussianBlur stdDeviation="3.2" result="b" />
+              <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+          </defs>
+          <use href="#orbit" class="orbit-guide" />
+          <g filter="url(#cometGlow)">
+            <circle class="comet-tail" r="2.0" opacity="0.30"><animateMotion dur="7s" begin="-0.34s" repeatCount="indefinite"><mpath href="#orbit" /></animateMotion></circle>
+            <circle class="comet-tail" r="2.6" opacity="0.45"><animateMotion dur="7s" begin="-0.25s" repeatCount="indefinite"><mpath href="#orbit" /></animateMotion></circle>
+            <circle class="comet-tail" r="3.3" opacity="0.65"><animateMotion dur="7s" begin="-0.16s" repeatCount="indefinite"><mpath href="#orbit" /></animateMotion></circle>
+            <circle class="comet-tail" r="4.1" opacity="0.85"><animateMotion dur="7s" begin="-0.08s" repeatCount="indefinite"><mpath href="#orbit" /></animateMotion></circle>
+            <circle class="comet-head" r="5.2"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#orbit" /></animateMotion></circle>
+          </g>
+        </svg>
+      </div>
+
+      <div class="fade-in-up">
+        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] uppercase text-brand mb-6">
+          <span class="w-6 h-px bg-brand"></span> Digital Studio
+        </span>
+        <h1 class="text-[40px] leading-[1.08] md:text-[78px] font-extrabold text-primary tracking-tight max-w-4xl text-balance">
+          Precision in Design.<br />Excellence in Development.
+        </h1>
+        <p class="text-lg md:text-xl text-on-surface-variant mt-6 max-w-2xl mx-auto text-balance leading-relaxed">
+          Astroindo crafts sophisticated, high-fidelity websites and digital products for ambitious brands. Clarity over clutter. Intention over decoration.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 mt-10 justify-center">
+          <a href="#work" class="btn bg-primary text-white text-sm font-semibold px-8 py-4 rounded-full hover:bg-inverse-surface transition-colors duration-300">
+            Explore Our Work
+          </a>
+          <a href="#contact" class="btn bg-transparent border border-stroke-subtle text-primary text-sm font-semibold px-8 py-4 rounded-full hover:bg-white transition-colors duration-300">
+            Start a Project
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== SERVICES ============== -->
+  <section id="services" class="w-full py-[100px] md:py-[128px] px-margin-mobile md:px-margin-desktop max-w-container mx-auto">
+    <div class="fade-in-up text-center mb-16">
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-brand">What we do</span>
+      <h2 class="text-[32px] md:text-[44px] font-bold text-primary tracking-tight mt-3">Built to the last pixel</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+      <!-- Service 1 -->
+      <div class="service-card fade-in-up bg-surface-container-lowest rounded-2xl p-10 border border-stroke-subtle flex flex-col h-full">
+        <span class="svc-icon mb-8"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">branding_watermark</span></span>
+        <h3 class="text-2xl font-semibold text-primary mb-3">Brand Identity</h3>
+        <p class="text-on-surface-variant leading-relaxed flex-grow">
+          We forge timeless visual identities rooted in quiet luxury and uncompromised precision — so your brand speaks volumes with the slightest whisper.
+        </p>
+        <span class="mt-8 text-brand text-sm font-semibold flex items-center gap-1">
+          Learn more <span class="material-symbols-outlined text-base">chevron_right</span>
+        </span>
+      </div>
+      <!-- Service 2 -->
+      <div class="service-card fade-in-up delay-1 bg-surface-container-lowest rounded-2xl p-10 border border-stroke-subtle flex flex-col h-full">
+        <span class="svc-icon mb-8"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">web</span></span>
+        <h3 class="text-2xl font-semibold text-primary mb-3">UI/UX Design</h3>
+        <p class="text-on-surface-variant leading-relaxed flex-grow">
+          High-end, tactile interfaces that feel like physical hardware. Every interaction is mapped to eliminate friction and elevate the user journey.
+        </p>
+        <span class="mt-8 text-brand text-sm font-semibold flex items-center gap-1">
+          Learn more <span class="material-symbols-outlined text-base">chevron_right</span>
+        </span>
+      </div>
+      <!-- Service 3 -->
+      <div class="service-card fade-in-up delay-2 bg-surface-container-lowest rounded-2xl p-10 border border-stroke-subtle flex flex-col h-full">
+        <span class="svc-icon mb-8"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">code_blocks</span></span>
+        <h3 class="text-2xl font-semibold text-primary mb-3">Full-Stack Dev</h3>
+        <p class="text-on-surface-variant leading-relaxed flex-grow">
+          Robust, scalable architecture with pixel-perfect frontend execution. We build digital infrastructure that performs flawlessly under scale.
+        </p>
+        <span class="mt-8 text-brand text-sm font-semibold flex items-center gap-1">
+          Learn more <span class="material-symbols-outlined text-base">chevron_right</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== WORK (Bento) ============== -->
+  <section id="work" class="w-full py-[100px] md:py-[128px] px-margin-mobile md:px-margin-desktop max-w-container mx-auto">
+    <div class="fade-in-up text-center mb-16">
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-brand">Selected work</span>
+      <h2 class="text-[32px] md:text-[44px] font-bold text-primary tracking-tight mt-3">Recent Work</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter auto-rows-[400px] fade-in-up">
+      <!-- Main feature -->
+      <div class="work-card md:col-span-8 rounded-2xl border border-stroke-subtle overflow-hidden relative group cursor-pointer">
+        <div class="viz viz-1">
+          <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g fill="none" stroke="rgba(120,170,255,0.25)" stroke-width="1.5">
+              <path d="M60 300 L160 240 L260 270 L360 180 L460 210 L560 120 L660 150 L740 90" />
+            </g>
+            <g fill="rgba(120,170,255,0.12)">
+              <rect x="540" y="60" width="220" height="120" rx="12" />
+            </g>
+            <g fill="rgba(255,255,255,0.10)">
+              <rect x="60" y="70" width="150" height="14" rx="7" />
+              <rect x="60" y="98" width="90" height="14" rx="7" />
+            </g>
+            <circle cx="660" cy="150" r="5" fill="#7aa6ff" />
+          </svg>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent z-10"></div>
+        <div class="absolute bottom-0 left-0 p-8 md:p-10 z-20 w-full">
+          <span class="inline-block bg-surface-glass backdrop-blur-md px-3 py-1 rounded-xl mb-4 border border-white/20 text-xs font-medium text-white">FinTech Ecosystem</span>
+          <h3 class="text-2xl md:text-3xl font-semibold text-white mb-2">Aura Banking Platform</h3>
+          <p class="text-white/85 max-w-md">Complete UX strategy and frontend architecture for a next-generation wealth management application.</p>
+        </div>
+      </div>
+
+      <!-- Secondary stack -->
+      <div class="md:col-span-4 flex flex-col gap-gutter h-full">
+        <div class="work-card flex-1 rounded-2xl border border-stroke-subtle overflow-hidden relative group cursor-pointer">
+          <div class="viz viz-2">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect x="150" y="40" width="100" height="200" rx="20" fill="#ffffff" stroke="rgba(0,0,0,0.10)" />
+              <rect x="162" y="62" width="76" height="10" rx="5" fill="rgba(230,33,24,0.55)" />
+              <rect x="162" y="84" width="56" height="8" rx="4" fill="rgba(0,0,0,0.18)" />
+              <rect x="162" y="120" width="76" height="44" rx="10" fill="rgba(0,0,0,0.06)" />
+              <rect x="162" y="176" width="76" height="44" rx="10" fill="rgba(0,0,0,0.06)" />
+            </svg>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent z-10"></div>
+          <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
+            <h3 class="text-xl font-semibold text-white mb-1">Lumina App</h3>
+            <p class="text-white/80 text-sm">iOS Design System</p>
+          </div>
+        </div>
+        <div class="work-card flex-1 rounded-2xl border border-stroke-subtle overflow-hidden relative group cursor-pointer">
+          <div class="viz viz-3">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <g fill="#ffffff" stroke="rgba(0,0,0,0.08)">
+                <rect x="40" y="50" width="100" height="80" rx="10" />
+                <rect x="155" y="50" width="100" height="80" rx="10" />
+                <rect x="270" y="50" width="100" height="80" rx="10" />
+                <rect x="40" y="145" width="100" height="80" rx="10" />
+                <rect x="155" y="145" width="100" height="80" rx="10" />
+                <rect x="270" y="145" width="100" height="80" rx="10" />
+              </g>
+              <rect x="40" y="50" width="100" height="80" rx="10" fill="rgba(230,33,24,0.10)" />
+            </svg>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent z-10"></div>
+          <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
+            <h3 class="text-xl font-semibold text-white mb-1">Vanguard Commerce</h3>
+            <p class="text-white/80 text-sm">Web App Development</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 flex justify-center fade-in-up">
+      <a href="#contact" class="btn bg-transparent border border-stroke-subtle text-primary text-sm font-semibold px-8 py-3 rounded-full hover:bg-white transition-colors duration-300 flex items-center gap-2">
+        View Full Archive <span class="material-symbols-outlined text-base">arrow_forward</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============== ABOUT / STATS ============== -->
+  <section id="about" class="w-full py-[80px] md:py-[110px] px-margin-mobile md:px-margin-desktop max-w-container mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+      <div class="fade-in-up">
+        <span class="text-xs font-semibold tracking-[0.18em] uppercase text-brand">Who we are</span>
+        <h2 class="text-[30px] md:text-[40px] font-bold text-primary tracking-tight mt-3 mb-5 text-balance">
+          A studio obsessed with the details others overlook.
+        </h2>
+        <p class="text-on-surface-variant leading-relaxed text-lg">
+          We are a compact, senior team partnering with founders and brand leaders to ship work that feels effortless and looks inevitable — from the first pixel to production.
+        </p>
+      </div>
+      <div class="fade-in-up delay-1 grid grid-cols-2 gap-gutter">
+        <div class="bg-surface-container-lowest rounded-2xl border border-stroke-subtle p-7">
+          <div class="text-4xl font-extrabold text-primary tracking-tight">10<span class="text-brand">+</span></div>
+          <div class="text-on-surface-variant text-sm mt-1">Years of craft</div>
+        </div>
+        <div class="bg-surface-container-lowest rounded-2xl border border-stroke-subtle p-7">
+          <div class="text-4xl font-extrabold text-primary tracking-tight">120<span class="text-brand">+</span></div>
+          <div class="text-on-surface-variant text-sm mt-1">Projects shipped</div>
+        </div>
+        <div class="bg-surface-container-lowest rounded-2xl border border-stroke-subtle p-7">
+          <div class="text-4xl font-extrabold text-primary tracking-tight">98<span class="text-brand">%</span></div>
+          <div class="text-on-surface-variant text-sm mt-1">Client retention</div>
+        </div>
+        <div class="bg-surface-container-lowest rounded-2xl border border-stroke-subtle p-7">
+          <div class="text-4xl font-extrabold text-primary tracking-tight">∞</div>
+          <div class="text-on-surface-variant text-sm mt-1">Pixels aligned</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CTA BAND ============== -->
+  <section id="contact" class="w-full px-margin-mobile md:px-margin-desktop pb-[100px]">
+    <div class="cta-band max-w-container mx-auto rounded-[28px] bg-primary text-white px-8 md:px-16 py-16 md:py-20 text-center fade-in-up">
+      <div class="relative z-10 flex flex-col items-center">
+        <h2 class="text-[30px] md:text-[48px] font-bold tracking-tight max-w-2xl text-balance">
+          Let's build something exceptional.
+        </h2>
+        <p class="text-white/70 mt-5 max-w-xl text-lg">
+          Tell us about your brand and timeline. We reply within one business day.
+        </p>
+        <a href="mailto:astroindo@gmail.com" class="btn mt-9 bg-white text-primary text-sm font-semibold px-9 py-4 rounded-full hover:bg-white/90 transition-colors duration-300 inline-flex items-center gap-2">
+          <span class="material-symbols-outlined text-base">mail</span> Start a Project
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============== FOOTER ============== -->
+<footer class="bg-surface text-on-surface w-full py-14 border-t border-stroke-subtle">
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center px-margin-mobile md:px-margin-desktop max-w-container mx-auto gap-8">
+    <a class="brand" href="#home">
+      <img class="brand__mark" src="assets/img/logo-mark.png" alt="" width="40" height="40" />
+      <span class="brand__name">Astro<b>indo</b></span>
+    </a>
+    <nav class="flex flex-wrap gap-x-6 gap-y-2 items-center text-sm">
+      <a class="text-on-surface-variant hover:text-brand transition-colors" href="#services">Services</a>
+      <a class="text-on-surface-variant hover:text-brand transition-colors" href="#work">Work</a>
+      <a class="text-on-surface-variant hover:text-brand transition-colors" href="#about">About</a>
+      <a class="text-on-surface-variant hover:text-brand transition-colors" href="mailto:astroindo@gmail.com">Contact</a>
+    </nav>
+    <div class="text-on-surface-variant text-sm">
+      © <span id="year">2026</span> Astroindo. Precision in Every Pixel.
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

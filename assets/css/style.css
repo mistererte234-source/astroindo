@@ -1,0 +1,247 @@
+/* ============================================================
+   Astroindo — Landing Page
+   Custom animations & components on top of Tailwind utilities.
+   Brand red: #e62118 · Living black: #1d1d1f · Surface: #f9f9fb
+   ============================================================ */
+
+:root {
+  --brand-red: #e62118;
+  --brand-red-soft: rgba(230, 33, 24, 0.5);
+  --ink: #1d1d1f;
+}
+
+html { scroll-behavior: smooth; }
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--brand-red), #ff6a5b);
+  z-index: 60;
+  transition: width 0.1s linear;
+}
+
+/* ---------- Generic scroll reveal ---------- */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-in-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.10s; }
+.delay-2 { transition-delay: 0.20s; }
+.delay-3 { transition-delay: 0.30s; }
+
+/* ============================================================
+   NAV BRAND
+   ============================================================ */
+.brand { display: inline-flex; align-items: center; gap: 0.6rem; }
+.brand__mark {
+  height: 34px; width: auto;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease;
+}
+.brand:hover .brand__mark {
+  transform: rotate(-8deg) scale(1.08);
+  filter: drop-shadow(0 0 9px var(--brand-red-soft));
+}
+.brand__name {
+  font-weight: 700; font-size: 1.35rem; letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.brand__name b { color: var(--brand-red); font-weight: 700; }
+
+/* ============================================================
+   ANIMATED HERO LOGO
+   Real Astroindo logo + reveal wipe, idle float, glow pulse,
+   silhouette shine sweep, and an orbiting comet (SVG).
+   ============================================================ */
+.hero-logo {
+  position: relative;
+  width: min(360px, 76vw);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 2.5rem;
+}
+
+.hero-logo__glow {
+  position: absolute; inset: 6%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230, 33, 24, 0.30), transparent 62%);
+  filter: blur(22px);
+  z-index: 0;
+  animation: glowPulse 4.5s ease-in-out infinite;
+}
+
+.hero-logo__imgwrap {
+  position: relative;
+  width: 76%;
+  z-index: 1;
+  animation: logoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-logo__img {
+  display: block; width: 100%; height: auto;
+  filter: drop-shadow(0 20px 34px rgba(0, 0, 0, 0.13));
+  animation: floaty 6s ease-in-out infinite;
+}
+.hero-logo__shine {
+  position: absolute; inset: 0;
+  background: linear-gradient(115deg,
+              transparent 38%, rgba(255, 255, 255, 0.75) 50%, transparent 62%);
+  background-size: 280% 100%;
+  -webkit-mask: url(../img/logo.png) center / contain no-repeat;
+          mask: url(../img/logo.png) center / contain no-repeat;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 2;
+  animation: shine 6.5s ease-in-out infinite;
+}
+
+/* Orbiting comet */
+.hero-orbit {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 3;
+  animation: orbitSpin 0s; /* placeholder to allow reduced-motion override */
+}
+.orbit-guide {
+  fill: none;
+  stroke: rgba(230, 33, 24, 0.16);
+  stroke-width: 1;
+  stroke-dasharray: 3 7;
+}
+.comet-head { fill: var(--brand-red); }
+.comet-tail { fill: var(--brand-red); }
+
+@keyframes logoReveal {
+  from { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateY(14px) scale(0.9); }
+  to   { clip-path: inset(0 0 0 0);   opacity: 1; transform: translateY(0)    scale(1);   }
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.55; transform: scale(0.95); }
+  50%      { opacity: 0.95; transform: scale(1.07); }
+}
+@keyframes shine {
+  0%, 42%  { background-position: 160% 0; }
+  72%, 100% { background-position: -160% 0; }
+}
+
+/* ============================================================
+   STARFIELD (subtle, astro theme)
+   ============================================================ */
+.stars { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.star {
+  position: absolute;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--brand-red);
+  opacity: 0;
+  animation: twinkle 4s ease-in-out infinite;
+}
+.star.gray { background: #9a9aa0; }
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.6); }
+  50%      { opacity: 0.55; transform: scale(1); }
+}
+
+/* ============================================================
+   BUTTONS — refined interactions
+   ============================================================ */
+.btn { position: relative; overflow: hidden; }
+.btn::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%);
+  transform: translateX(-130%);
+  transition: transform 0.7s ease;
+}
+.btn:hover::after { transform: translateX(130%); }
+
+/* ============================================================
+   SERVICE CARDS
+   ============================================================ */
+.service-card {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s ease, border-color 0.5s ease;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.07);
+  border-color: rgba(230, 33, 24, 0.25);
+}
+.service-card .svc-icon {
+  display: grid; place-items: center;
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  background: rgba(230, 33, 24, 0.08);
+  color: var(--brand-red);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s;
+}
+.service-card:hover .svc-icon {
+  transform: scale(1.08) rotate(-4deg);
+  background: rgba(230, 33, 24, 0.14);
+}
+
+/* ============================================================
+   PORTFOLIO — self-contained visuals (no external images)
+   ============================================================ */
+.viz { position: absolute; inset: 0; z-index: 0; }
+.viz-1 {
+  background:
+    radial-gradient(120% 90% at 20% 0%, #2b3a4a 0%, #161d27 55%, #0c1118 100%);
+}
+.viz-2 {
+  background:
+    radial-gradient(120% 100% at 80% 10%, #ffffff 0%, #eceef3 45%, #d7dbe4 100%);
+}
+.viz-3 {
+  background:
+    radial-gradient(120% 100% at 10% 0%, #f4f5f8 0%, #e6e8ee 55%, #d3d7e1 100%);
+}
+.viz svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.work-card { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+.work-card img, .work-card .viz { transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+.work-card:hover .viz { transform: scale(1.04); }
+
+/* ============================================================
+   FINAL CTA glow
+   ============================================================ */
+.cta-band { position: relative; overflow: hidden; }
+.cta-band::before {
+  content: ""; position: absolute; inset: -40% 30% auto;
+  height: 380px;
+  background: radial-gradient(circle, rgba(230, 33, 24, 0.35), transparent 60%);
+  filter: blur(60px);
+  z-index: 0;
+}
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+.mobile-menu {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-menu.open { max-height: 320px; }
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
+  .hero-logo__imgwrap { clip-path: none; opacity: 1; transform: none; }
+  .fade-in-up { opacity: 1; transform: none; }
+  .comet-head, .comet-tail, .star { display: none; }
+}
